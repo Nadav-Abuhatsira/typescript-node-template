@@ -1,0 +1,21 @@
+{
+  "check-coverage": true,
+  "lines": 98,
+  "statements": 98,
+  "branches": 98,
+  "functions": 98,
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "src/index.ts",
+    "src/**/test/**/*.ts",
+    "src/**/tests/**/*.ts"
+  ],
+  "reporter": [
+    "lcov",
+    "text-summary"
+  ],
+  "all": true
+}

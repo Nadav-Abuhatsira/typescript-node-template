@@ -1,0 +1,11 @@
+{
+  "extension": [
+    "ts"
+  ],
+  "spec": "src/**/*.spec.ts",
+  "require": [
+    "tsconfig-paths/register",
+    "ts-node/register/transpile-only"
+  ],
+  "timeout": 3000
+}
