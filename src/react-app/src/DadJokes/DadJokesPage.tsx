@@ -33,15 +33,12 @@ export default function DadJokesPage() {
       <h1>DadJokesPage</h1>
       <span className="joke">{joke}</span>
       <button onClick={getNextJoke}>Get Next Joke from web</button>
-
-      <button onClick={storeJoke}>Store Current Joke</button>
-
       <h3>Jokes I like</h3>
       {storedJokes.map((joke: any) => (
         <span>{joke.joke}</span>
       ))}
-
-      <button onClick={getStoredJokes}>Refresh stored jokes</button>
+      <button onClick={storeJoke}>Save Current Joke</button>
+      {/*<button onClick={getStoredJokes}>Refresh stored jokes</button>*/}
     </div>
   );
 }
