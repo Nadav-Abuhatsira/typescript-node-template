@@ -2,7 +2,10 @@
   "extension": [
     "ts"
   ],
-  "spec": "src/**/*.spec.ts",
+  "spec": [
+    "src/express-server/**/*.spec.ts",
+    "src/math-example/**/*.spec.ts"
+  ],
   "require": [
     "tsconfig-paths/register",
     "ts-node/register/transpile-only"
