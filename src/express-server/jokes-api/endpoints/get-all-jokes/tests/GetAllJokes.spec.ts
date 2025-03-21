@@ -2,6 +2,7 @@ import expect from 'expect';
 import { createSandbox } from 'sinon';
 import { StatusCodes } from 'http-status-codes';
 import AppStub, { sendOrgMgmtRequest } from '../../../../../common/base-endpoint/tests/test-doubles/AppStub';
+import JokesRepository from '../../../repositories/JokesRepository';
 
 describe('GetAllJokes endpoint tests', () => {
   const sandbox = createSandbox();
@@ -21,11 +22,17 @@ describe('GetAllJokes endpoint tests', () => {
   });
 
   context('when valid request is sent', () => {
-    it('should return a refreshed token in expected format', async () => {
+    it('should return all jokes', async () => {
+      const joke = 'dummy-joke1';
+      JokesRepository.deleteAllJokes();
+      JokesRepository.addJoke(joke);
       const res = await GetAllJokesEndpoint();
       const { body, status } = res;
       expect(status).toEqual(StatusCodes.OK);
-      expect(body).toEqual([{ id: 'joke1-id', joke: 'dummy-joke1' }]);
+      expect(body.length).toBe(1);
+      const firstJoke = body[0];
+      expect(firstJoke.id).toBeDefined();
+      expect(firstJoke.joke).toEqual(joke);
     });
   });
 });

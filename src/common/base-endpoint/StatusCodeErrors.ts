@@ -17,14 +17,14 @@ export class StatusCodeError extends Error {
   }
 }
 
-/**
- * Error that has a NOT_FOUND status code
- */
 export class NotFoundError extends StatusCodeError {
-  /**
-   * @param message The error message
-   */
   constructor(message: string) {
     super(StatusCodes.NOT_FOUND, message);
+  }
+}
+
+export class BadRequestError extends StatusCodeError {
+  constructor(message: string) {
+    super(StatusCodes.BAD_REQUEST, message);
   }
 }
