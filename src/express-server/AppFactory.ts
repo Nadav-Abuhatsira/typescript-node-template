@@ -1,10 +1,11 @@
 import express, { Application, RequestHandler, Router } from 'express';
 import bodyParser from 'body-parser';
 import ProjectRouterFactoryV2 from './exmple-api/ExampleRouterFactory';
+import JokesRouterFactory from './jokes-api/JokesRouterFactory';
 
 export default class AppFactory {
   private static createRouters(): Router[] {
-    return [ProjectRouterFactoryV2.create()];
+    return [ProjectRouterFactoryV2.create(), JokesRouterFactory.create()];
   }
 
   private static createMiddleware(): RequestHandler[] {
