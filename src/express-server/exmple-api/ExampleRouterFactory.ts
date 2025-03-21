@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import SayHi from './endpoints/say-hi/SayHi';
 
-export default class ProjectRouterFactory {
+export default class ExampleRouterFactory {
   public static create(): Router {
     const router = Router();
 

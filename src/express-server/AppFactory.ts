@@ -1,6 +1,6 @@
 import express, { Application, RequestHandler, Router } from 'express';
 import bodyParser from 'body-parser';
-import ProjectRouterFactoryV2 from './exmple-api/ProjectRouterFactory';
+import ProjectRouterFactoryV2 from './exmple-api/ExampleRouterFactory';
 
 export default class AppFactory {
   private static createRouters(): Router[] {
