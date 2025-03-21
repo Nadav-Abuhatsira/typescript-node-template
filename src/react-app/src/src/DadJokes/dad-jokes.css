@@ -1,0 +1,10 @@
+.dad-Joke-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .joke {
+    height: 120px;
+  }
+}
+
