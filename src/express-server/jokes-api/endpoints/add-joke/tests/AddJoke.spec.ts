@@ -27,7 +27,8 @@ describe('AddJoke endpoint tests', () => {
       const res = await AddJokeEndpoint({ joke });
       const { body, status } = res;
       expect(status).toEqual(StatusCodes.OK);
-      expect(body).toEqual('OK');
+      expect(body.joke).toEqual(joke);
+      expect(body.id).toBeDefined();
       const allJokes = JokesRepository.getAllJokes();
       const lastJoke = allJokes[allJokes.length - 1];
       expect(lastJoke.joke).toEqual(joke);

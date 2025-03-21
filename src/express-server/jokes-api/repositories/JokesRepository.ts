@@ -7,8 +7,10 @@ export default class GetAllJokesRepository {
     return this.jokes;
   }
 
-  static addJoke(joke: string): void {
-    this.jokes.push({ id: uuidv4(), joke });
+  static addJoke(joke: string): any {
+    const jokeElm = { id: uuidv4(), joke };
+    this.jokes.push(jokeElm);
+    return jokeElm;
   }
 
   static deleteAllJokes(): void {

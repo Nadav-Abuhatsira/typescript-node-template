@@ -6,8 +6,7 @@ export default class AddJoke extends BaseEndpointHandler {
   async getResponseContent(): Promise<any> {
     this.validateBody();
     const { joke } = this.body;
-    JokesRepository.addJoke(joke);
-    return 'OK';
+    return JokesRepository.addJoke(joke);
   }
 
   validateBody(): void {
