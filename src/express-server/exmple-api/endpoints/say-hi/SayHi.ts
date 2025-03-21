@@ -1,4 +1,4 @@
-import BaseEndpointHandler from '../base-endpoint/BaseEndpointHandler';
+import BaseEndpointHandler from '../../../../common/base-endpoint/BaseEndpointHandler';
 
 export default class SayHi extends BaseEndpointHandler {
   async getResponseContent(): Promise<any> {
