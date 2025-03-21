@@ -1,6 +1,6 @@
-import BaseEndpointHandler from '../../../../common/base-endpoint/BaseEndpointHandler';
+import BaseEndpointHandler from '../../../common/base-endpoint/BaseEndpointHandler';
 import JokesRepository from '../../repositories/JokesRepository';
-import { BadRequestError } from '../../../../common/base-endpoint/StatusCodeErrors';
+import { BadRequestError } from '../../../common/base-endpoint/StatusCodeErrors';
 
 export default class AddJoke extends BaseEndpointHandler {
   async getResponseContent(): Promise<any> {

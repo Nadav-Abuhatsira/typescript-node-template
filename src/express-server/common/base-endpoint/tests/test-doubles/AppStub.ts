@@ -1,7 +1,7 @@
 import { Application } from 'express';
 import sinon from 'sinon';
 import request, { Response } from 'supertest';
-import AppFactory from '../../../../express-server/AppFactory';
+import AppFactory from '../../../../AppFactory';
 
 export default class AppStub {
   sandbox: sinon.SinonSandbox;

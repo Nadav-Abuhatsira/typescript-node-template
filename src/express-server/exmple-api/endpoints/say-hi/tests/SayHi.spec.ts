@@ -1,7 +1,7 @@
 import expect from 'expect';
 import { createSandbox } from 'sinon';
 import { StatusCodes } from 'http-status-codes';
-import AppStub, { sendOrgMgmtRequest } from '../../../../../common/base-endpoint/tests/test-doubles/AppStub';
+import AppStub, { sendOrgMgmtRequest } from '../../../../common/base-endpoint/tests/test-doubles/AppStub';
 
 describe('say hi endpoint tests', () => {
   const sandbox = createSandbox();
