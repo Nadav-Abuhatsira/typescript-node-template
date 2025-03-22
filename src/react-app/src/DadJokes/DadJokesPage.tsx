@@ -40,7 +40,7 @@ export default function DadJokesPage() {
   return (
     <div className="dad-Joke-page">
       <ToastContainer />
-      <h1>DadJokesPage</h1>
+      <h1>Dad Jokes</h1>
       <span className="joke">{joke}</span>
       <div className="buttons-panel">
         <button onClick={storeJoke} className="button-17">
