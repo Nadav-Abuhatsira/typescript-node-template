@@ -56,9 +56,11 @@ export default function DadJokesPage() {
         </button>
       </div>
       <h3>Jokes I like</h3>
-      {storedJokes.map((joke: Joke) => (
-        <StoredJoke joke={joke} onJokeRemoved={onJokeRemoved} key={joke.id} />
-      ))}
+      <div className="stored-jokes">
+        {storedJokes.map((joke: Joke) => (
+          <StoredJoke joke={joke} onJokeRemoved={onJokeRemoved} key={joke.id} />
+        ))}
+      </div>
     </div>
   );
 }

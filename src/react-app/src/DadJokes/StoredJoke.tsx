@@ -1,6 +1,7 @@
 import React from 'react';
 import './dad-jokes.css';
 import '../style/button.css';
+import '../style/text.css';
 import { Joke } from './api/joke';
 import { deleteJokeApi } from './api/jokes-api';
 import { toast } from 'react-toastify';
@@ -16,10 +17,12 @@ export default function StoredJoke({ joke, onJokeRemoved }: { joke: Joke; onJoke
   };
 
   return (
-    <div>
-      <span className="stored-Joke">{joke.joke}</span>
-      <button onClick={removeJoke} className="button-17 close-button">
-        X
+    <div className="stored-Joke">
+      <span className="ellipsis-text" title={joke.joke}>
+        {joke.joke}
+      </span>
+      <button onClick={removeJoke} className="button-17 close-button" title="remove joke">
+        x
       </button>
     </div>
   );

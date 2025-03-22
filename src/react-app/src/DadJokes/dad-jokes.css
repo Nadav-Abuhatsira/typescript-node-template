@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  min-width: 300px;
 
   .joke {
     height: 120px;
@@ -17,13 +18,32 @@
     justify-content: space-between;
   }
 
-  .stored-Joke {
-    margin: 4px 0;
+  .stored-jokes {
+    border: #7f7f7f 1px solid;
+    border-radius: 8px;
+    padding: 16px;
   }
 
-  .close-button {
-    height: 21px;
-    width: 32px;
-    padding: 2px 0;
+  .stored-Joke {
+    margin: 4px 0;
+    height: 33px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: lightblue 1px solid;
+
+    &:hover {
+      background: #e8e8e8;
+    }
+
+    .close-button {
+      height: 21px;
+      width: 32px;
+      min-width: 32px;
+      padding: 2px 0;
+      background: transparent;
+      color: #c21f39;
+      box-shadow: none;
+    }
   }
 }
