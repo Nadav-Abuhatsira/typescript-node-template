@@ -1,10 +1,23 @@
 .dad-Joke-page {
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 
   .joke {
     height: 120px;
+    border: #7f7f7f 1px solid;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .buttons-panel {
+    margin: 16px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .stored-Joke {
+    margin: 4px 0;
   }
 }
-
