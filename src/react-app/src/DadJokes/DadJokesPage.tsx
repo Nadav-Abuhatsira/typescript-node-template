@@ -3,10 +3,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import './dad-jokes.css';
 import '../style/button.css';
 import { getRandomJokeFromWeb, getStoredJokesApi, storeJokeApi } from './api/jokes-api';
+import { Joke } from './api/joke';
+import StoredJoke from './StoredJoke';
 
 export default function DadJokesPage() {
   const [joke, setJoke] = useState('');
-  const [storedJokes, setStoredJokes] = useState([]);
+  const [storedJokes, setStoredJokes] = useState<Joke[]>([]);
 
   const getNextJoke = async () => {
     const joke = await getRandomJokeFromWeb();
@@ -25,11 +27,14 @@ export default function DadJokesPage() {
   const storeJoke = async () => {
     try {
       const newJoke = await storeJokeApi(joke);
-      // @ts-ignore
       setStoredJokes([...storedJokes, newJoke]);
     } catch (error) {
       toast('Error saving joke you liked. make sure the server is up');
     }
+  };
+
+  const onJokeRemoved = (joke: Joke) => {
+    setStoredJokes(storedJokes.filter((j: any) => j.id !== joke.id));
   };
 
   useEffect(() => {
@@ -51,10 +56,8 @@ export default function DadJokesPage() {
         </button>
       </div>
       <h3>Jokes I like</h3>
-      {storedJokes.map((joke: any, index: number) => (
-        <span key={index} className="stored-Joke">
-          {joke.joke}
-        </span>
+      {storedJokes.map((joke: Joke) => (
+        <StoredJoke joke={joke} onJokeRemoved={onJokeRemoved} key={joke.id} />
       ))}
     </div>
   );

@@ -20,4 +20,10 @@
   .stored-Joke {
     margin: 4px 0;
   }
+
+  .close-button {
+    height: 21px;
+    width: 32px;
+    padding: 2px 0;
+  }
 }

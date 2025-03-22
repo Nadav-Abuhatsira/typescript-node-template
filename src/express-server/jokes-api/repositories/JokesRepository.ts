@@ -16,4 +16,8 @@ export default class GetAllJokesRepository {
   static deleteAllJokes(): void {
     this.jokes = [];
   }
+
+  static deleteJoke(jokeId: string): void {
+    this.jokes = this.jokes.filter((joke: any) => joke.id !== jokeId);
+  }
 }
