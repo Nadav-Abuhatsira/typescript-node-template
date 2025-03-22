@@ -5,7 +5,10 @@
     display: flex;
     justify-content: center;
     list-style: none;
-    padding: 0;
+    background: cadetblue;
+    padding: 10px;
+    margin: 0;
+
   }
 
   .nav-elm {
@@ -14,7 +17,11 @@
 
   .nav-link {
     text-decoration: none;
-    color: #333;
+    color: #fff;
+
+    &.active{
+      color: darkblue;
+    }
   }
 }
 
