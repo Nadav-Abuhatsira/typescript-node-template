@@ -5,6 +5,7 @@ import './App.css';
 import './style/button.css';
 import DadJokesPage from './DadJokes/DadJokesPage';
 import Home from './Home';
+import ChartsPage from './charts/ChartsPage';
 
 function App() {
   return (
@@ -22,11 +23,17 @@ function App() {
                 Dad Jokes
               </NavLink>
             </li>
+            <li className="nav-elm">
+              <NavLink to="/charts" className="nav-link">
+                Charts
+              </NavLink>
+            </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dad-jokes" element={<DadJokesPage />} />
+          <Route path="/charts" element={<ChartsPage />} />
         </Routes>
       </Router>
     </div>
