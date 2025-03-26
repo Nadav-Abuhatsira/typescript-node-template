@@ -5,6 +5,7 @@ import S3 from '../../../common/aws/S3';
 
 export default class GetPlaylist extends BaseEndpointHandler {
   async getResponseContent(): Promise<any> {
+    //return this.getHardcodedResponse();
     dotenv.config();
     const fileContent = await this.getS3File();
     const { artist } = fileContent;
@@ -55,5 +56,87 @@ export default class GetPlaylist extends BaseEndpointHandler {
       },
     });
     return res.data;
+  }
+
+  getHardcodedResponse(): any {
+    return {
+      items: [
+        {
+          videoId: 'fJ9rUzIMcZQ',
+          title: 'Queen – Bohemian Rhapsody (Official Video Remastered)',
+          thumbnail: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/default.jpg',
+        },
+        {
+          videoId: 'j440-D5JhjI',
+          title: 'Queen - Greatest Hits (2) [1 hour 20 minutes long]',
+          thumbnail: 'https://i.ytimg.com/vi/j440-D5JhjI/default.jpg',
+        },
+        {
+          videoId: 'HgzGwKwLmgM',
+          title: 'Queen - Don&#39;t Stop Me Now (Official Video)',
+          thumbnail: 'https://i.ytimg.com/vi/HgzGwKwLmgM/default.jpg',
+        },
+        {
+          videoId: '-tJYN-eG1zk',
+          title: 'Queen - We Will Rock You (Official Video)',
+          thumbnail: 'https://i.ytimg.com/vi/-tJYN-eG1zk/default.jpg',
+        },
+        {
+          videoId: 'kijpcUv-b8M',
+          title: 'Queen - Somebody To Love (Official Video)',
+          thumbnail: 'https://i.ytimg.com/vi/kijpcUv-b8M/default.jpg',
+        },
+        {
+          videoId: 'xFrGuyw1V8s',
+          title: 'ABBA - Dancing Queen (Official Music Video)',
+          thumbnail: 'https://i.ytimg.com/vi/xFrGuyw1V8s/default.jpg',
+        },
+        {
+          videoId: 'XEjLoHdbVeE',
+          title: 'ABBA - Gimme! Gimme! Gimme! (A Man After Midnight)',
+          thumbnail: 'https://i.ytimg.com/vi/XEjLoHdbVeE/default.jpg',
+        },
+        {
+          videoId: 'unfzfe8f9NI',
+          title: 'ABBA - Mamma Mia (Official Music Video)',
+          thumbnail: 'https://i.ytimg.com/vi/unfzfe8f9NI/default.jpg',
+        },
+        {
+          videoId: 'p4QqMKe3rwY',
+          title: 'ABBA - Chiquitita (Official Music Video)',
+          thumbnail: 'https://i.ytimg.com/vi/p4QqMKe3rwY/default.jpg',
+        },
+        {
+          videoId: 'ETxmCCsMoD0',
+          title: 'ABBA - Money, Money, Money (Official Music Video)',
+          thumbnail: 'https://i.ytimg.com/vi/ETxmCCsMoD0/default.jpg',
+        },
+        {
+          videoId: '0gF2yrIVmQU',
+          title: 'Bee Gees Greatest Hits 2024   Pop Music Mix   Top 10 Hits Of All Time',
+          thumbnail: 'https://i.ytimg.com/vi/0gF2yrIVmQU/default.jpg',
+        },
+        {
+          videoId: 'XpqqjU7u5Yc',
+          title: 'Bee Gees - How Deep Is Your Love (Official Video)',
+          thumbnail: 'https://i.ytimg.com/vi/XpqqjU7u5Yc/default.jpg',
+        },
+        {
+          videoId: 'fNFzfwLM72c',
+          title: 'Bee Gees - Stayin&#39; Alive (Official Music Video)',
+          thumbnail: 'https://i.ytimg.com/vi/fNFzfwLM72c/default.jpg',
+        },
+        {
+          videoId: 'FuoWykVNwyI',
+          title: 'Bee Gees - Massachusetts (One For All Tour Live In Australia 1989)',
+          thumbnail: 'https://i.ytimg.com/vi/FuoWykVNwyI/default.jpg',
+        },
+        {
+          videoId: 'i6iBAuwBODA',
+          title: 'Bee Gees - Too Much Heaven',
+          thumbnail: 'https://i.ytimg.com/vi/i6iBAuwBODA/default.jpg',
+        },
+      ],
+    };
   }
 }
