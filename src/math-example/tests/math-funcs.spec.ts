@@ -20,4 +20,47 @@ describe('MathFuncs tests', () => {
       expect(MathFuncs.factorial(0)).toBe(1);
     });
   });
+
+  context('IsUpperCaseWord', () => {
+    it('simple case', () => {
+      expect(MathFuncs.IsUpperCaseWord('A')).toBe(true);
+      expect(MathFuncs.IsUpperCaseWord('a')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('Aaaaa')).toBe(true);
+      expect(MathFuncs.IsUpperCaseWord('AaaaB')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('1aaa')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('12Ab')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('abcdY')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('Abcd')).toBe(true);
+      expect(MathFuncs.IsUpperCaseWord('AbCd')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('Abcd?')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('?123')).toBe(false);
+      expect(MathFuncs.IsUpperCaseWord('')).toBe(false);
+    });
+
+    it('isLetter simple case', () => {
+      expect(MathFuncs.isLetter('A')).toBe(true);
+      expect(MathFuncs.isLetter('a')).toBe(true);
+      expect(MathFuncs.isLetter('5')).toBe(false);
+    });
+
+    it('capitalizeWord simple case', () => {
+      expect(MathFuncs.capitalizeWord('A')).toBe('A');
+      expect(MathFuncs.capitalizeWord('hi')).toBe('Hi');
+      expect(MathFuncs.capitalizeWord('5hi')).toBe('Hi');
+      //12Ab - Ab
+      expect(MathFuncs.capitalizeWord('12Ab')).toBe('Ab');
+      // abcdY - Abcdy
+      expect(MathFuncs.capitalizeWord('abcdY')).toBe('Abcdy');
+      // Abcd - Abcd
+      expect(MathFuncs.capitalizeWord('Abcd')).toBe('Abcd');
+      // ?Abcd? - Abcd
+      expect(MathFuncs.capitalizeWord('?Abcd?')).toBe('Abcd');
+      // AB[cd] - Abcd
+      expect(MathFuncs.capitalizeWord('AB[cd]')).toBe('Abcd');
+      // a - A
+      expect(MathFuncs.capitalizeWord('a')).toBe('A');
+      // 123? - “”
+      expect(MathFuncs.capitalizeWord('123?')).toBe('');
+    });
+  });
 });
