@@ -14,48 +14,48 @@ export default class GetPlaylist extends BaseEndpointHandler {
     //return this.searchAbbaVideos();
   }
 
-  buildYoutubeSearchUrl(query: string, maxResults = 10): string {
-    const baseUrl = 'https://www.googleapis.com/youtube/v3/search';
-    const params = new URLSearchParams({
-      part: 'snippet',
-      maxResults: maxResults.toString(),
-      q: query,
-      type: 'video',
-      key: process.env.YOUTUBE_API_KEY,
-    });
+  // buildYoutubeSearchUrl(query: string, maxResults = 10): string {
+  //   const baseUrl = 'https://www.googleapis.com/youtube/v3/search';
+  //   const params = new URLSearchParams({
+  //     part: 'snippet',
+  //     maxResults: maxResults.toString(),
+  //     q: query,
+  //     type: 'video',
+  //     key: process.env.YOUTUBE_API_KEY as string,
+  //   });
 
-    return `${baseUrl}?${params.toString()}`;
-  }
+  //   return `${baseUrl}?${params.toString()}`;
+  // }
 
-  //function from gemini AI
-  async searchAbbaVideos(): Promise<any> {
-    const query = 'ABBA videos';
-    const url = this.buildYoutubeSearchUrl(query);
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
+  // //function from gemini AI
+  // async searchAbbaVideos(): Promise<any> {
+  //   const query = 'ABBA videos';
+  //   const url = this.buildYoutubeSearchUrl(query);
+  //   try {
+  //     const response = await fetch(url);
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     const data = await response.json();
 
-      if (data.items) {
-        const videoItems = data.items.map((item) => ({
-          videoId: item.id.videoId,
-          title: item.snippet.title,
-          thumbnail: item.snippet.thumbnails.default.url,
-          channelTitle: item.snippet.channelTitle,
-          description: item.snippet.description,
-        }));
-        return videoItems;
-      } else {
-        console.log('No videos found');
-        return [];
-      }
-    } catch (error) {
-      console.error('Error fetching YouTube videos:', error);
-      return []; // Return an empty array in case of an error.
-    }
-  }
+  //     if (data.items) {
+  //       const videoItems = data.items.map((item: any) => ({
+  //         videoId: item.id.videoId,
+  //         title: item.snippet.title,
+  //         thumbnail: item.snippet.thumbnails.default.url,
+  //         channelTitle: item.snippet.channelTitle,
+  //         description: item.snippet.description,
+  //       }));
+  //       return videoItems;
+  //     } else {
+  //       console.log('No videos found');
+  //       return [];
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching YouTube videos:', error);
+  //     return []; // Return an empty array in case of an error.
+  //   }
+  // }
 
   async getS3File(): Promise<any> {
     const config = {
