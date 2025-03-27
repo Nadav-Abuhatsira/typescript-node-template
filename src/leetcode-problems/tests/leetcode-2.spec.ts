@@ -62,26 +62,21 @@ describe('leetcode problems tests 2', () => {
     // Return the maximum number of operations you can perform on the array.
 
     function maxOperations(nums: number[], k: number): number {
-      let res = 0;
+      let ops = 0;
       const hist = new NumCount();
-
       for (let i = 0; i < nums.length; i++) {
         const currNum = nums[i];
         if (currNum < k) {
-          hist.add(currNum);
+          const comp = k - currNum;
+          if (hist.get(comp) > 0) {
+            hist.subsract(comp);
+            ops++;
+          } else {
+            hist.add(currNum);
+          }
         }
       }
-      for (let i = 1; i <= k / 2; i++) {
-        const currNumCount = hist.get(i);
-        const compNumCount = hist.get(k - i);
-        if (i === k / 2) {
-          res += Math.floor(currNumCount / 2);
-        } else {
-          const min = currNumCount < compNumCount ? currNumCount : compNumCount;
-          res += min;
-        }
-      }
-      return res;
+      return ops;
     }
 
     it('should work', () => {
