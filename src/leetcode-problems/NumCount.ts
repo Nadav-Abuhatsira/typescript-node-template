@@ -10,7 +10,7 @@ export default class NumCount {
     this.dict.set(num, this.get(num) + 1);
   }
 
-  public subsract(num: number): void {
+  public subtract(num: number): void {
     this.dict.set(num, this.get(num) - 1);
   }
 }

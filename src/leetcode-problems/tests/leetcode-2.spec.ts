@@ -69,7 +69,7 @@ describe('leetcode problems tests 2', () => {
         if (currNum < k) {
           const comp = k - currNum;
           if (hist.get(comp) > 0) {
-            hist.subsract(comp);
+            hist.subtract(comp);
             ops++;
           } else {
             hist.add(currNum);
@@ -82,6 +82,30 @@ describe('leetcode problems tests 2', () => {
     it('should work', () => {
       expect(maxOperations([1, 2, 3, 4], 5)).toEqual(2);
       expect(maxOperations([3, 1, 3, 4, 3], 6)).toEqual(1);
+    });
+  });
+
+  context('643. Maximum Average Subarray I', () => {
+    // You are given an integer array nums consisting of n elements, and an integer k.
+    // Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+
+    function findMaxAverage(nums: number[], k: number): number {
+      let max = Number.MIN_SAFE_INTEGER;
+      for (let i = 0; i <= nums.length - k; i++) {
+        let sum = 0;
+        for (let j = i; j < i + k; j++) {
+          sum += nums[j];
+        }
+        const avg = sum / k;
+        max = Math.max(max, avg);
+      }
+      return max;
+    }
+
+    it('should work', () => {
+      expect(findMaxAverage([1, 12, -5, -6, 50, 3], 4)).toEqual(12.75);
+      expect(findMaxAverage([5], 1)).toEqual(5);
+      expect(findMaxAverage([-1], 1)).toEqual(-1);
     });
   });
 });
