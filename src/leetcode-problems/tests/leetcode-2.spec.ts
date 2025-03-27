@@ -1,4 +1,5 @@
 import expect from 'expect';
+import NumCount from '../NumCount';
 
 describe('leetcode problems tests 2', () => {
   context('283. Move Zeroes', () => {
@@ -52,6 +53,40 @@ describe('leetcode problems tests 2', () => {
     it('should work', () => {
       expect(isSubsequence('abc', 'ahbgdc')).toEqual(true);
       expect(isSubsequence('axc', 'ahbgdc')).toEqual(false);
+    });
+  });
+
+  context('1679. Max Number of K-Sum Pairs', () => {
+    // You are given an integer array nums and an integer k.
+    // In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.
+    // Return the maximum number of operations you can perform on the array.
+
+    function maxOperations(nums: number[], k: number): number {
+      let res = 0;
+      const hist = new NumCount();
+
+      for (let i = 0; i < nums.length; i++) {
+        const currNum = nums[i];
+        if (currNum < k) {
+          hist.add(currNum);
+        }
+      }
+      for (let i = 1; i <= k / 2; i++) {
+        const currNumCount = hist.get(i);
+        const compNumCount = hist.get(k - i);
+        if (i === k / 2) {
+          res += Math.floor(currNumCount / 2);
+        } else {
+          const min = currNumCount < compNumCount ? currNumCount : compNumCount;
+          res += min;
+        }
+      }
+      return res;
+    }
+
+    it('should work', () => {
+      expect(maxOperations([1, 2, 3, 4], 5)).toEqual(2);
+      expect(maxOperations([3, 1, 3, 4, 3], 6)).toEqual(1);
     });
   });
 });
