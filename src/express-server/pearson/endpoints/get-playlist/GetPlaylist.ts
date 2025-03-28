@@ -66,7 +66,7 @@ export default class GetPlaylist extends BaseEndpointHandler {
       },
     };
     const s3 = new S3(config);
-    return s3.getS3AsJson('pearson-backend-exercise', 'toSearch.json');
+    return s3.getAsJsonObject('pearson-backend-exercise', 'toSearch.json');
   }
 
   async getVideosOfArtists(artists: string[]): Promise<any> {
