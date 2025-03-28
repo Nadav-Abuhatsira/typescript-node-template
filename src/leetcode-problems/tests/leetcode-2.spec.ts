@@ -181,4 +181,25 @@ describe('leetcode problems tests 2', () => {
       expect(longestSubarray([1, 1, 1])).toEqual(2);
     });
   });
+
+  context('1732. Find the Highest Altitude', () => {
+    // There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on point 0 with altitude equal 0.
+    // You are given an integer array gain of length n where gain[i] is the net gain in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a point.
+
+    function largestAltitude(gain: number[]): number {
+      let max = 0;
+      let gainFromStart = 0;
+      for (let i = 0; i < gain.length; i++) {
+        const currGain = gain[i];
+        gainFromStart += currGain;
+        max = Math.max(max, gainFromStart);
+      }
+      return max;
+    }
+
+    it('should work', () => {
+      expect(largestAltitude([-5, 1, 5, 0, -7])).toEqual(1);
+      expect(largestAltitude([-4, -3, -2, -1, 4, 3, 2])).toEqual(0);
+    });
+  });
 });
