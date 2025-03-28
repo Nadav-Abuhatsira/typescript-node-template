@@ -11,7 +11,8 @@
     "dist",
     "src/index.ts",
     "src/**/test/**/*.ts",
-    "src/**/tests/**/*.ts"
+    "src/**/tests/**/*.ts",
+    "src/express-server/common/aws"
   ],
   "reporter": [
     "lcov",
