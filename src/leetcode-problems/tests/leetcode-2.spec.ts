@@ -202,4 +202,36 @@ describe('leetcode problems tests 2', () => {
       expect(largestAltitude([-4, -3, -2, -1, 4, 3, 2])).toEqual(0);
     });
   });
+
+  context('724. Find Pivot Index', () => {
+    // Given an array of integers nums, calculate the pivot index of this array.
+    // The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+    // If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+    // Return the leftmost pivot index. If no such index exists, return -1.
+
+    function pivotIndex(nums: number[]): number {
+      if (nums.length === 1) return 0;
+      if (nums.length <= 1) return -1;
+      let leftSum = nums[0];
+      let rightSum = 0;
+      for (let i = 2; i < nums.length; i++) rightSum += nums[i];
+      if (rightSum + nums[1] === 0) return 0;
+      for (let i = 1; i < nums.length - 1; i++) {
+        if (leftSum === rightSum) return i;
+        leftSum += nums[i];
+        rightSum -= nums[i + 1];
+      }
+      if (leftSum === 0) return nums.length - 1;
+      return -1;
+    }
+
+    it('should work', () => {
+      expect(pivotIndex([1, 7, 3, 6, 5, 6])).toEqual(3);
+      expect(pivotIndex([1, 2, 3])).toEqual(-1);
+      expect(pivotIndex([2, 1, -1])).toEqual(0);
+      expect(pivotIndex([-1, -1, 0, 1, 1, 0])).toEqual(5);
+      expect(pivotIndex([-1, -1, -1, 1, 1, 1])).toEqual(-1);
+      expect(pivotIndex([0])).toEqual(0);
+    });
+  });
 });
