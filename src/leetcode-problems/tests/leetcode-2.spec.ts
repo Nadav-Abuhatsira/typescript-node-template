@@ -137,4 +137,48 @@ describe('leetcode problems tests 2', () => {
       expect(maxVowels('tryhard', 4)).toEqual(1);
     });
   });
+
+  context("1493. Longest Subarray of 1's After Deleting One Element", () => {
+    // Given a binary array nums, you should delete one element from it.
+    // Return the size of the longest non-empty subarray containing only 1's in the resulting array. Return 0 if there is no such subarray.
+
+    function longestSubarray(nums: number[]): number {
+      let max = 0;
+      let prevNum = undefined;
+      let s1 = 0;
+      let s2 = 0;
+      for (let i = 0; i < nums.length; i++) {
+        const currNum = nums[i];
+        if (currNum === 0 && prevNum === 0) {
+          max = Math.max(max, s1 + s2);
+          s1 = s2 = 0;
+        }
+        if (currNum === 1) {
+          if (prevNum === 0 || prevNum === undefined) {
+            if (s1 > 0 && s2 > 0) {
+              max = Math.max(max, s1 + s2);
+              s1 = s2;
+              s2 = 0;
+            }
+            if (s1 === 0) s1++;
+            else s2++;
+          } else if (prevNum === 1) {
+            if (s2 === 0) s1++;
+            else s2++;
+          }
+        }
+
+        prevNum = currNum;
+      }
+      max = Math.max(max, s1 + s2);
+      if (max === nums.length) return max - 1;
+      return max;
+    }
+
+    it('should work', () => {
+      expect(longestSubarray([1, 1, 0, 1])).toEqual(3);
+      expect(longestSubarray([0, 1, 1, 1, 0, 1, 1, 0, 1])).toEqual(5);
+      expect(longestSubarray([1, 1, 1])).toEqual(2);
+    });
+  });
 });
