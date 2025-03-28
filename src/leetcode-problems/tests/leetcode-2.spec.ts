@@ -96,10 +96,9 @@ describe('leetcode problems tests 2', () => {
         for (let j = i; j < i + k; j++) {
           sum += nums[j];
         }
-        const avg = sum / k;
-        max = Math.max(max, avg);
+        max = Math.max(max, sum);
       }
-      return max;
+      return max / k;
     }
 
     it('should work', () => {
