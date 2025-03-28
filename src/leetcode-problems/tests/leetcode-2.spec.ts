@@ -234,4 +234,41 @@ describe('leetcode problems tests 2', () => {
       expect(pivotIndex([0])).toEqual(0);
     });
   });
+
+  context('2215. Find the Difference of Two Arrays', () => {
+    // Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where:
+    // answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
+    // answer[1] is a list of all distinct integers in nums2 which are not present in nums1.
+    // Note that the integers in the lists may be returned in any order.
+
+    function findDifference(nums1: number[], nums2: number[]): number[][] {
+      const notIn1 = new NumCount();
+      const notIn2 = new NumCount();
+      const in1 = new NumCount();
+      const in2 = new NumCount();
+
+      for (let i = 0; i < nums1.length; i++) {
+        in1.add(nums1[i]);
+      }
+      for (let i = 0; i < nums2.length; i++) {
+        const n2 = nums2[i];
+        in2.add(n2);
+        if (!in1.contains(n2)) notIn1.add(n2);
+      }
+
+      for (let i = 0; i < nums1.length; i++) {
+        const n1 = nums1[i];
+        if (!in2.contains(n1)) notIn2.add(n1);
+      }
+      return [notIn2.getKeys(), notIn1.getKeys()];
+    }
+
+    it('should work', () => {
+      expect(findDifference([1, 2, 3], [2, 4, 6])).toEqual([
+        [1, 3],
+        [4, 6],
+      ]);
+      expect(findDifference([1, 2, 3, 3], [1, 1, 2, 2])).toEqual([[3], []]);
+    });
+  });
 });

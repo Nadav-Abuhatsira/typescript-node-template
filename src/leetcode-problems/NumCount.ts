@@ -13,4 +13,12 @@ export default class NumCount {
   public subtract(num: number): void {
     this.dict.set(num, this.get(num) - 1);
   }
+
+  public contains(num: number): boolean {
+    return this.dict.get(num) != undefined;
+  }
+
+  public getKeys(): number[] {
+    return [...this.dict.keys()];
+  }
 }
