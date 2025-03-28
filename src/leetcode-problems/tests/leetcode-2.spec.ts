@@ -107,4 +107,34 @@ describe('leetcode problems tests 2', () => {
       expect(findMaxAverage([-1], 1)).toEqual(-1);
     });
   });
+
+  context('1456. Maximum Number of Vowels in a Substring of Given Length', () => {
+    // Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+
+    function isVowel(s: string): boolean {
+      return s === 'a' || s === 'e' || s === 'i' || s === 'o' || s === 'u';
+    }
+
+    function maxVowels(s: string, k: number): number {
+      let max = 0;
+      let curSubStringVowels = 0;
+      for (let i = 0; i < k; i++) {
+        if (isVowel(s[i])) curSubStringVowels++;
+      }
+      max = curSubStringVowels;
+      for (let i = k; i < s.length; i++) {
+        if (isVowel(s[i - k])) curSubStringVowels--;
+        if (isVowel(s[i])) curSubStringVowels++;
+        max = Math.max(max, curSubStringVowels);
+      }
+      return max;
+    }
+
+    it('should work', () => {
+      expect(maxVowels('abciiidef', 3)).toEqual(3);
+      expect(maxVowels('aeiou', 2)).toEqual(2);
+      expect(maxVowels('leetcode', 3)).toEqual(2);
+      expect(maxVowels('tryhard', 4)).toEqual(1);
+    });
+  });
 });
