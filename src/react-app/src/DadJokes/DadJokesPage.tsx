@@ -7,12 +7,12 @@ import { getStoredJokesApi, storeJokeApi } from './api/jokes-api';
 import { Joke } from './api/joke';
 import StoredJoke from './StoredJoke';
 import { fetchWebJoke } from './actions/web-joke';
-import { getWebJoke, loadingWebJoke } from './selectors/joke-selectors';
+import { getWebJoke } from './selectors/joke-selectors';
+import WebJoke from './WebJoke';
 
 export default function DadJokesPage() {
   const dispatch = useDispatch();
   const joke = useSelector(getWebJoke);
-  const loading = useSelector(loadingWebJoke);
 
   const [storedJokes, setStoredJokes] = useState<Joke[]>([]);
 
@@ -43,7 +43,6 @@ export default function DadJokesPage() {
   };
 
   useEffect(() => {
-    if (!joke && !loading) getNextJoke();
     getStoredJokes();
   }, []);
 
@@ -51,8 +50,7 @@ export default function DadJokesPage() {
     <div className="dad-Joke-page">
       <ToastContainer />
       <h1>Dad Jokes</h1>
-      {loading && <span className="joke">Loading...</span>}
-      {!loading && <span className="joke">{joke}</span>}
+      <WebJoke />
       <div className="buttons-panel">
         <button onClick={storeJoke} className="button-17">
           Save Current Joke
