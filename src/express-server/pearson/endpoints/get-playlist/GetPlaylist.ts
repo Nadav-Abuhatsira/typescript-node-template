@@ -1,12 +1,10 @@
-import dotenv from 'dotenv';
-import axios from 'axios';
 import BaseEndpointHandler from '../../../common/base-endpoint/BaseEndpointHandler';
 import S3 from '../../../common/aws/S3';
+import { search } from '../../../common/google/youtube';
 
 export default class GetPlaylist extends BaseEndpointHandler {
   async getResponseContent(): Promise<any> {
     //return this.getHardcodedResponse();
-    dotenv.config();
     const fileContent = await this.getS3File();
     const { artist } = fileContent;
     //{"artist":["Queen","ABBA","Bee Gees"]}
@@ -79,27 +77,11 @@ export default class GetPlaylist extends BaseEndpointHandler {
   }
 
   async getArtistItems(artist: string): Promise<any> {
-    const res = await this.search(artist);
+    const res = await search(artist);
     const { items } = res;
     return items.map((item: any) => {
       return { videoId: item.id.videoId, title: item.snippet.title, thumbnail: item.snippet.thumbnails.default.url };
     });
-  }
-
-  async search(query: string): Promise<any> {
-    const apiKey = process.env.YOUTUBE_API_KEY;
-    const res = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-      headers: {
-        'X-Goog-Api-Key': apiKey,
-        'Content-Type': 'application/json',
-      },
-      params: {
-        part: 'snippet',
-        q: query,
-        type: 'video',
-      },
-    });
-    return res.data;
   }
 
   getHardcodedResponse(): any {

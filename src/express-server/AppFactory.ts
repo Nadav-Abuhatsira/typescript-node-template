@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import ProjectRouterFactoryV2 from './pearson/PearsonRouterFactory';
 import JokesRouterFactory from './jokes-api/JokesRouterFactory';
 import PearsonRouterFactory from './pearson/PearsonRouterFactory';
+import dotenv from 'dotenv';
 
 export default class AppFactory {
   private static createRouters(): Router[] {
@@ -18,6 +19,7 @@ export default class AppFactory {
 
     app.disable('x-powered-by');
 
+    dotenv.config();
     AppFactory.createMiddleware().forEach((middleware): void => {
       app.use(middleware);
     });
