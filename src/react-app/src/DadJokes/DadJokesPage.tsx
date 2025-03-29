@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import './dad-jokes.css';
 import '../style/button.css';
-import { getRandomJokeFromWeb, getStoredJokesApi, storeJokeApi } from './api/jokes-api';
+import { getStoredJokesApi, storeJokeApi } from './api/jokes-api';
 import { Joke } from './api/joke';
 import StoredJoke from './StoredJoke';
+import { fetchWebJoke } from './actions/web-joke';
+import { getWebJoke, loadingWebJoke } from './selectors/joke-selectors';
 
 export default function DadJokesPage() {
-  const [joke, setJoke] = useState('');
+  const dispatch = useDispatch();
+  const joke = useSelector(getWebJoke);
+  const loading = useSelector(loadingWebJoke);
+
   const [storedJokes, setStoredJokes] = useState<Joke[]>([]);
 
   const getNextJoke = async () => {
-    const joke = await getRandomJokeFromWeb();
-    setJoke(joke);
+    dispatch(fetchWebJoke() as any);
   };
 
   const getStoredJokes = async () => {
@@ -26,7 +31,7 @@ export default function DadJokesPage() {
 
   const storeJoke = async () => {
     try {
-      const newJoke = await storeJokeApi(joke);
+      const newJoke = await storeJokeApi(joke as string);
       setStoredJokes([...storedJokes, newJoke]);
     } catch (error) {
       toast('Error saving joke you liked. make sure the server is up');
@@ -38,7 +43,7 @@ export default function DadJokesPage() {
   };
 
   useEffect(() => {
-    getNextJoke();
+    if (!joke && !loading) getNextJoke();
     getStoredJokes();
   }, []);
 
@@ -46,7 +51,8 @@ export default function DadJokesPage() {
     <div className="dad-Joke-page">
       <ToastContainer />
       <h1>Dad Jokes</h1>
-      <span className="joke">{joke}</span>
+      {loading && <span className="joke">Loading...</span>}
+      {!loading && <span className="joke">{joke}</span>}
       <div className="buttons-panel">
         <button onClick={storeJoke} className="button-17">
           Save Current Joke
