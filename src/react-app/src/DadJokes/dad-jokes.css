@@ -5,17 +5,22 @@
   align-items: stretch;
   min-width: 300px;
 
-  .joke {
-    height: 120px;
-    border: #7f7f7f 1px solid;
-    border-radius: 8px;
-    padding: 16px;
+  .web-joke {
+    display: flex;
+    flex-direction: column;
+
+    .joke {
+      height: 120px;
+      border: #7f7f7f 1px solid;
+      border-radius: 8px;
+      padding: 16px;
+    }
   }
 
   .buttons-panel {
-    margin: 16px 0;
+    margin: 16px 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 
   .stored-jokes {
