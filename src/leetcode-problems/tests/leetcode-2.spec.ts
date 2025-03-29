@@ -242,8 +242,8 @@ describe('leetcode problems tests 2', () => {
     // Note that the integers in the lists may be returned in any order.
 
     function findDifference(nums1: number[], nums2: number[]): number[][] {
-      const notIn1 = new NumCount();
-      const notIn2 = new NumCount();
+      const notIn1 = new NumCount<number>();
+      const notIn2 = new NumCount<number>();
       const in1 = new NumCount();
       const in2 = new NumCount();
 
@@ -339,6 +339,47 @@ describe('leetcode problems tests 2', () => {
       expect(closeStrings('abc', 'bca')).toEqual(true);
       expect(closeStrings('a', 'aa')).toEqual(false);
       expect(closeStrings('cabbba', 'abbccc')).toEqual(true);
+    });
+  });
+
+  context('2352. Equal Row and Column Pairs', () => {
+    // Given a 0-indexed n x n integer matrix grid, return the number of pairs (ri, cj) such that row ri and column cj are equal.
+    // A row and column pair is considered equal if they contain the same elements in the same order (i.e., an equal array).
+
+    function equalPairs(grid: number[][]): number {
+      const n = grid.length;
+      let pairs = 0;
+      for (let row = 0; row < n; row++) {
+        for (let col = 0; col < n; col++) {
+          let isPair = true;
+          for (let i = 0; i < n; i++) {
+            if (grid[row][i] !== grid[i][col]) {
+              isPair = false;
+              break;
+            }
+          }
+          if (isPair) pairs++;
+        }
+      }
+      return pairs;
+    }
+
+    it('should work', () => {
+      expect(
+        equalPairs([
+          [3, 2, 1],
+          [1, 7, 6],
+          [2, 7, 7],
+        ])
+      ).toEqual(1);
+      expect(
+        equalPairs([
+          [3, 1, 2, 2],
+          [1, 4, 4, 5],
+          [2, 4, 2, 2],
+          [2, 4, 2, 2],
+        ])
+      ).toEqual(3);
     });
   });
 });
