@@ -1,13 +1,13 @@
-import { JokeState } from '../reducer/jokeReducer';
+import { RootState } from '../../store/rootReducer';
 
-export function getWebJoke(state: JokeState) {
-  return state.joke;
+export function getWebJoke({ dadJokes }: RootState) {
+  return dadJokes.joke;
 }
 
-export function loadingWebJoke(state: JokeState) {
-  return state.loading;
+export function loadingWebJoke({ dadJokes }: RootState) {
+  return dadJokes.loading;
 }
 
-export function getWebJokeError(state: JokeState) {
-  return state.error;
+export function getWebJokeError({ dadJokes }: RootState) {
+  return dadJokes.error;
 }
