@@ -1,24 +1,28 @@
-export default class NumCount {
-  private dict: Map<number, number> = new Map();
+export default class NumCount<FROM> {
+  private dict: Map<FROM, number> = new Map();
 
-  public get(num: number): number {
+  public get(num: FROM): number {
     const count = this.dict.get(num);
     return count != null ? count : 0;
   }
 
-  public add(num: number): void {
+  public add(num: FROM): void {
     this.dict.set(num, this.get(num) + 1);
   }
 
-  public subtract(num: number): void {
+  public subtract(num: FROM): void {
     this.dict.set(num, this.get(num) - 1);
   }
 
-  public contains(num: number): boolean {
+  public contains(num: FROM): boolean {
     return this.dict.get(num) != undefined;
   }
 
-  public getKeys(): number[] {
+  public getKeys(): FROM[] {
     return [...this.dict.keys()];
+  }
+
+  public getValues(): number[] {
+    return [...this.dict.values()];
   }
 }
