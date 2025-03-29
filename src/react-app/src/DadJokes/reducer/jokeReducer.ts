@@ -5,42 +5,46 @@ import {
   WEB_JOKE_LOADED,
   WEB_JOKE_ERROR,
   JokeActionTypes,
-  WebJokeLoadedAction, WebJokeErrorAction
+  WebJokeLoadedAction,
+  WebJokeErrorAction,
 } from '../actions/action-types';
 
-export interface JokeState {
+export interface WebJokeState {
   joke: string | null;
   loading: boolean;
   error: string | null;
 }
 
+export interface JokeState {
+  webJoke: WebJokeState;
+}
+
 const initialState: JokeState = {
-  joke: null,
-  loading: false,
-  error: null,
+  webJoke: {
+    joke: null,
+    loading: false,
+    error: null,
+  },
 };
 
 const onWebJokeLoading = (state: JokeState) => {
   return {
     ...state,
-    loading: true,
-    error: null,
+    webJoke: { ...state.webJoke, loading: true, error: null },
   };
 };
 
 const onWebJokeLoaded = (state: JokeState, action: WebJokeLoadedAction) => {
   return {
     ...state,
-    loading: false,
-    joke: action.payload,
+    webJoke: { ...state.webJoke, loading: false, joke: action.payload },
   };
 };
 
 const onWebJokeError = (state: JokeState, action: WebJokeErrorAction) => {
   return {
     ...state,
-    loading: false,
-    error: action.payload,
+    webJoke: { ...state.webJoke, loading: false, error: action.payload },
   };
 };
 
