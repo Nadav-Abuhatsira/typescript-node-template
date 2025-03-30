@@ -507,7 +507,9 @@ describe('leetcode problems tests 2', () => {
 
       ping(t: number): number {
         this.times.enqueue(t);
-        while (this.times.peek() < t - this.span) {
+        while (1) {
+          const peek = this.times.peek();
+          if (peek == null || peek >= t - this.span) break;
           this.times.dequeue();
         }
         return this.times.size();
