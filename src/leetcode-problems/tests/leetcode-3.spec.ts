@@ -78,4 +78,25 @@ describe('leetcode problems tests 3', () => {
       expect(listToArray(oddEvenList(listFromArray([1, 2, 3, 4, 5])))).toEqual([1, 3, 5, 2, 4]);
     });
   });
+
+  context('206. Reverse Linked List', () => {
+    // Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+    function reverseList(head: ListNode | null): ListNode | null {
+      if (head == null) return null;
+      let reversedHead: ListNode | null = null;
+      let currNode: ListNode | null = head;
+      while (currNode != null) {
+        const prevHead = reversedHead;
+        reversedHead = currNode;
+        currNode = currNode.next;
+        reversedHead.next = prevHead;
+      }
+      return reversedHead;
+    }
+
+    it('should work', () => {
+      expect(listToArray(reverseList(listFromArray([1, 2, 3, 4, 5])))).toEqual([5, 4, 3, 2, 1]);
+    });
+  });
 });
