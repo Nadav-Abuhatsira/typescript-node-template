@@ -22,8 +22,7 @@ export function listToArray(head: ListNode | null): number[] {
   const arr: number[] = [];
   let curNode: ListNode | null = head;
   if (curNode == null) return arr;
-  arr.push(curNode.val);
-  while (curNode.next != null) {
+  while (curNode != null) {
     arr.push(curNode.val);
     curNode = curNode.next;
   }

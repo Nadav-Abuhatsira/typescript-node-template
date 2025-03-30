@@ -37,4 +37,45 @@ describe('leetcode problems tests 3', () => {
       expect(listToArray(deleteMiddle(listFromArray([2, 1])))).toEqual([2]);
     });
   });
+
+  context('328. Odd Even Linked List', () => {
+    // Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return the reordered list.
+    // The first node is considered odd, and the second node is even, and so on.
+    // Note that the relative order inside both the even and odd groups should remain as it was in the input.
+    // You must solve the problem in O(1) extra space complexity and O(n) time complexity.
+
+    function oddEvenList(head: ListNode | null): ListNode | null {
+      if (head == null) return null;
+      let oddHead: ListNode | null = null;
+      let evenHead: ListNode | null = null;
+      let oddTail: ListNode | null = null;
+      let evenTail: ListNode | null = null;
+
+      let isOdd = true;
+      let curNode: ListNode | null = head;
+      while (curNode != null) {
+        if (isOdd) {
+          if (oddHead == null) oddHead = curNode;
+          if (oddTail != null) oddTail.next = curNode;
+          oddTail = curNode;
+        } else {
+          //even
+          if (evenHead == null) evenHead = curNode;
+          if (evenTail != null) evenTail.next = curNode;
+          evenTail = curNode;
+        }
+        curNode = curNode.next;
+        isOdd = !isOdd;
+      }
+
+      if (oddTail != null) oddTail.next = evenHead;
+      if (evenTail != null) evenTail.next = null;
+
+      return oddHead;
+    }
+
+    it('should work', () => {
+      expect(listToArray(oddEvenList(listFromArray([1, 2, 3, 4, 5])))).toEqual([1, 3, 5, 2, 4]);
+    });
+  });
 });
