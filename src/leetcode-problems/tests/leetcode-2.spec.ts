@@ -1,5 +1,6 @@
 import expect from 'expect';
 import NumCount from '../NumCount';
+import { Queue } from '../Queue';
 
 describe('leetcode problems tests 2', () => {
   context('283. Move Zeroes', () => {
@@ -453,8 +454,11 @@ describe('leetcode problems tests 2', () => {
       constructor(repeats: number) {
         this.repeats = repeats;
       }
+
       public readonly repeats: number;
-      public str: string = '';
+
+      public str = '';
+
       parse(): string {
         let res = '';
         for (let i = 0; i < this.repeats; i++) {
@@ -497,21 +501,16 @@ describe('leetcode problems tests 2', () => {
 
   context('933. Number of Recent Calls', () => {
     class RecentCounter {
-      constructor() {}
-      private times: number[] = [];
+      private times = new Queue<number>();
+
       readonly span = 3000;
 
       ping(t: number): number {
-        this.times.push(t);
-        let idexToRemove = -1;
-        for (let i = 0; i < this.times.length; i++) {
-          if (this.times[i] < t - this.span) idexToRemove = i;
-          else break;
+        this.times.enqueue(t);
+        while (this.times.peek() < t - this.span) {
+          this.times.dequeue();
         }
-        if (idexToRemove >= 0) {
-          this.times = this.times.slice(idexToRemove + 1);
-        }
-        return this.times.length;
+        return this.times.size();
       }
     }
 
