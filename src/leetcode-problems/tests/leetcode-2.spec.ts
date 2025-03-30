@@ -494,4 +494,33 @@ describe('leetcode problems tests 2', () => {
       expect(decodeString('2[abc]3[cd]ef')).toEqual('abcabccdcdcdef');
     });
   });
+
+  context('933. Number of Recent Calls', () => {
+    class RecentCounter {
+      constructor() {}
+      private times: number[] = [];
+      readonly span = 3000;
+
+      ping(t: number): number {
+        this.times.push(t);
+        let idexToRemove = -1;
+        for (let i = 0; i < this.times.length; i++) {
+          if (this.times[i] < t - this.span) idexToRemove = i;
+          else break;
+        }
+        if (idexToRemove >= 0) {
+          this.times = this.times.slice(idexToRemove + 1);
+        }
+        return this.times.length;
+      }
+    }
+
+    it('should work', () => {
+      const rc = new RecentCounter();
+      expect(rc.ping(1)).toEqual(1);
+      expect(rc.ping(100)).toEqual(2);
+      expect(rc.ping(3001)).toEqual(3);
+      expect(rc.ping(3002)).toEqual(3);
+    });
+  });
 });
