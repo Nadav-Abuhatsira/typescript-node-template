@@ -430,4 +430,68 @@ describe('leetcode problems tests 2', () => {
       expect(asteroidCollision([-2, -2, 1, -2])).toEqual([-2, -2, -2]);
     });
   });
+
+  context('394. Decode String', () => {
+    // Given an encoded string, return its decoded string.
+    // The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.
+    // You may assume that the input string is always valid; there are no extra white spaces, square brackets are well-formed, etc. Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there will not be input like 3a or 2[4].
+    // The test cases are generated so that the length of the output will never exceed 105.
+
+    function isDigit(char: string): boolean {
+      if (char.length !== 1) {
+        return false; // Handle cases where the input is not a single character
+      }
+      const charCode = char.charCodeAt(0);
+      return charCode >= 48 && charCode <= 57; // ASCII codes for '0' to '9'
+    }
+
+    function stringToInt(str: string): number {
+      return parseInt(str, 10);
+    }
+
+    class Expression {
+      constructor(repeats: number) {
+        this.repeats = repeats;
+      }
+      public readonly repeats: number;
+      public str: string = '';
+      parse(): string {
+        let res = '';
+        for (let i = 0; i < this.repeats; i++) {
+          res += this.str;
+        }
+        return res;
+      }
+    }
+
+    function decodeString(s: string): string {
+      const expressions: Expression[] = [new Expression(1)];
+      let curNum = '';
+      for (let i = 0; i < s.length; i++) {
+        const letter = s[i];
+        const curExp = expressions[expressions.length - 1];
+        if (isDigit(letter)) curNum += letter;
+        else if (letter === '[') {
+          const exp = new Expression(stringToInt(curNum));
+          curNum = '';
+          expressions.push(exp);
+        } else if (letter === ']') {
+          const res = curExp.parse();
+          expressions.pop();
+          expressions[expressions.length - 1].str += res;
+        } else {
+          curExp.str += letter;
+        }
+      }
+      return expressions[0].parse();
+    }
+
+    it('should work', () => {
+      expect(decodeString('abc')).toEqual('abc');
+      expect(decodeString('11[d]')).toEqual('ddddddddddd');
+      expect(decodeString('3[a]2[bc]')).toEqual('aaabcbc');
+      expect(decodeString('3[a2[c]]')).toEqual('accaccacc');
+      expect(decodeString('2[abc]3[cd]ef')).toEqual('abcabccdcdcdef');
+    });
+  });
 });
