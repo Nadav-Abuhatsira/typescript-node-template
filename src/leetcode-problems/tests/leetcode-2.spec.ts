@@ -382,4 +382,52 @@ describe('leetcode problems tests 2', () => {
       ).toEqual(3);
     });
   });
+
+  context('735. Asteroid Collision', () => {
+    // We are given an array asteroids of integers representing asteroids in a row. The indices of the asteriod in the array represent their relative position in space.
+    // For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+    // Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+
+    function asteroidCollision(asteroids: number[]): number[] {
+      let survivors: number[] = [];
+      let lastGroup: number[] = [];
+      for (let i = 0; i < asteroids.length; i++) {
+        const asteroid = asteroids[i];
+        if (lastGroup.length == 0) {
+          lastGroup.push(asteroid);
+        } else {
+          let lastAsteroid = lastGroup[lastGroup.length - 1];
+          if (Math.sign(asteroid) === Math.sign(lastAsteroid)) {
+            lastGroup.push(asteroid);
+          } else if (asteroid < 0 && lastAsteroid > 0) {
+            //collide
+            for (let j = lastGroup.length - 1; j >= 0; j--) {
+              lastAsteroid = lastGroup[j];
+              if (Math.abs(lastAsteroid) > Math.abs(asteroid)) break;
+              else if (Math.abs(lastAsteroid) == Math.abs(asteroid)) {
+                lastGroup.pop();
+                break;
+              } else {
+                lastGroup.pop();
+                if (lastGroup.length === 0) lastGroup = [asteroid];
+              }
+            }
+          } else {
+            survivors = [...survivors, ...lastGroup];
+            lastGroup = [asteroid];
+          }
+        }
+      }
+      survivors = [...survivors, ...lastGroup];
+      return survivors;
+    }
+
+    it('should work', () => {
+      expect(asteroidCollision([5, 10, -5])).toEqual([5, 10]);
+      expect(asteroidCollision([8, -8])).toEqual([]);
+      expect(asteroidCollision([10, 2, -5])).toEqual([10]);
+      expect(asteroidCollision([-2, -1, 1, 2])).toEqual([-2, -1, 1, 2]);
+      expect(asteroidCollision([-2, -2, 1, -2])).toEqual([-2, -2, -2]);
+    });
+  });
 });
