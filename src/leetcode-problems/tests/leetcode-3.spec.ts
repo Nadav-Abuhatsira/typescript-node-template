@@ -1,5 +1,6 @@
 import expect from 'expect';
 import { listFromArray, ListNode, listToArray } from '../List';
+import { arrayToBinaryTree, TreeNode } from '../Tree';
 
 describe('leetcode problems tests 3', () => {
   context('2095. Delete the Middle Node of a Linked List', () => {
@@ -120,6 +121,21 @@ describe('leetcode problems tests 3', () => {
     it('should work', () => {
       expect(pairSum(listFromArray([5, 4, 2, 1]))).toEqual(6);
       expect(pairSum(listFromArray([4, 2, 2, 3]))).toEqual(7);
+    });
+  });
+
+  context('104. Maximum Depth of Binary Tree', () => {
+    // Given the root of a binary tree, return its maximum depth.
+    // A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+    function maxDepth(root: TreeNode | null): number {
+      if (root == null) return 0;
+      return Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+    }
+
+    it('should work', () => {
+      expect(maxDepth(arrayToBinaryTree([3, 9, 20, null, null, 15, 7]))).toEqual(3);
+      expect(maxDepth(arrayToBinaryTree([1, null, 2]))).toEqual(2);
     });
   });
 });
