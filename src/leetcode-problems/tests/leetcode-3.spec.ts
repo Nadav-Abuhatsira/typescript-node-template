@@ -138,4 +138,36 @@ describe('leetcode problems tests 3', () => {
       expect(maxDepth(arrayToBinaryTree([1, null, 2]))).toEqual(2);
     });
   });
+
+  context('872. Leaf-Similar Trees', () => {
+    // ...
+    function getLeafSequence(root: TreeNode | null): number[] {
+      if (root == null) return [];
+      if (root.left == null && root.right == null) return [root.val];
+      const leftSeq = getLeafSequence(root.left);
+      const rightSeq = getLeafSequence(root.right);
+      return [...leftSeq, ...rightSeq];
+    }
+
+    function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
+      const leafSeq1 = getLeafSequence(root1);
+      const leafSeq2 = getLeafSequence(root2);
+      if (leafSeq1.length !== leafSeq2.length) return false;
+      for (let i = 0; i < leafSeq1.length; i++) {
+        if (leafSeq1[i] !== leafSeq2[i]) return false;
+      }
+      return true;
+    }
+
+    it('should work', () => {
+      expect(getLeafSequence(arrayToBinaryTree([3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]))).toEqual([6, 7, 4, 9, 8]);
+      expect(
+        leafSimilar(
+          arrayToBinaryTree([3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]),
+          arrayToBinaryTree([3, 5, 1, 6, 2, 9, 8, null, null, 7, 4])
+        )
+      ).toEqual(true);
+      expect(leafSimilar(arrayToBinaryTree([1]), arrayToBinaryTree([2]))).toEqual(false);
+    });
+  });
 });
