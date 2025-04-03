@@ -170,4 +170,22 @@ describe('leetcode problems tests 3', () => {
       expect(leafSimilar(arrayToBinaryTree([1]), arrayToBinaryTree([2]))).toEqual(false);
     });
   });
+
+  context('1448. Count Good Nodes in Binary Tree', () => {
+    // Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
+    // Return the number of good nodes in the binary tree.
+
+    function goodNodes(root: TreeNode | null, max?: number): number {
+      if (root == null) return 0;
+      let isGood = 0;
+      if (max == null || root.val >= max) isGood = 1;
+      let newMax = max;
+      if (max == null || root.val > max) newMax = root.val;
+      return isGood + goodNodes(root.left, newMax) + goodNodes(root.right, newMax);
+    }
+
+    it('should work', () => {
+      expect(goodNodes(arrayToBinaryTree([3, 1, 4, 3, null, 1, 5]))).toEqual(4);
+    });
+  });
 });
